@@ -6,11 +6,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -23,7 +23,7 @@ import id.haonlabs.nosion.ui.viewmodel.NoteViewModel
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: NoteViewModel
+    private val viewModel: NoteViewModel by viewModels()
     private lateinit var adapter: NoteAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        viewModel = ViewModelProvider(this)[NoteViewModel::class.java]
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewNotes)
         recyclerView.layoutManager = LinearLayoutManager(this)

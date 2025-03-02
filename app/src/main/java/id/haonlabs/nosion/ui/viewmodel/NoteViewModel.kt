@@ -11,7 +11,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(private val repository: NoteRepository) : ViewModel() {
-    val allNotes: LiveData<List<Note>> = repository.allNotes
+    init {
+        viewModelScope.launch {
+            repository.fetchNotesFromApi()
+        }
+    }
+
+    val allNotes: LiveData<List<Note>> = repository.getAllNotes()
 
     fun addNote(note: Note) {
         viewModelScope.launch {
